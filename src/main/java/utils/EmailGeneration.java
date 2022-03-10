@@ -24,12 +24,4 @@ public class EmailGeneration {
         sb.append("@gmail.com");
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(generateRandomEmail());
-        System.out.println(generateRandomEmail());
-        System.out.println(generateRandomEmail());
-        System.out.println(generateRandomEmail());
-        System.out.println(generateRandomEmail());
-    }
 }
