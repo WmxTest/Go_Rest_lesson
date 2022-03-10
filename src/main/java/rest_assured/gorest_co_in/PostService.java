@@ -52,5 +52,4 @@ public class PostService extends BaseRestService {
             return false;
         }
     }
-
 }

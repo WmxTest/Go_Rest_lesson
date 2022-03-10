@@ -95,10 +95,4 @@ public class CommentService extends BaseRestService {
                 .assertThat()
                 .statusCode(204);
     }
-
-
-
-    public static void main(String[] args) {
-        System.out.println(isCommentExist(1546, createComment(1546).getId()));
-    }
 }
