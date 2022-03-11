@@ -26,5 +26,4 @@ public class Todo {
     public String dueOn;
     @JsonProperty("status")
     public String status;
-
 }

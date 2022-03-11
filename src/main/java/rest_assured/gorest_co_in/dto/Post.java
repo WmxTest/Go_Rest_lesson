@@ -24,5 +24,4 @@ public class Post {
     private String title;
     @JsonProperty("body")
     private String body;
-
 }

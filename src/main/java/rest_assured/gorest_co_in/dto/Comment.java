@@ -26,5 +26,4 @@ public class Comment {
     private String email;
     @JsonProperty("body")
     private String body;
-
 }

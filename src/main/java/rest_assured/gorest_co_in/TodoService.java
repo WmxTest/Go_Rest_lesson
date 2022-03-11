@@ -27,8 +27,6 @@ public class TodoService extends BaseRestService {
                 .statusCode(201)
                 .extract()
                 .as(Todo.class);
-
-
     }
 
     public static void main(String[] args) {

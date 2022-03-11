@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static io.restassured.RestAssured.given;
-import static utils.EmailGeneration.generateRandomEmail;
+import static utils.EmailGenerator.generateRandomEmail;
 
 public class CommentService extends BaseRestService {
 
