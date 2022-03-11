@@ -13,7 +13,7 @@ public class TodoService extends BaseRestService {
         body.setId(userId);
         body.setStatus(status);
         body.setTitle("test");
-        body.setDueOn(getLocalDateTime("YYYY-MM-ddEHH:mm:ss.nnnx"));
+        body.setDueOn(getLocalDateTime());
 
         given()
                 .spec(requestSpecification)
