@@ -4,7 +4,7 @@ import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.Todo;
 
 import static io.restassured.RestAssured.given;
-import static utils.DateGenerator.getLocalDateTime;
+import static utils.DateGenerator.getDateTime;
 
 public class TodoService extends BaseRestService {
 
@@ -13,7 +13,7 @@ public class TodoService extends BaseRestService {
         body.setId(userId);
         body.setStatus(status);
         body.setTitle("test");
-        body.setDueOn(getLocalDateTime());
+        body.setDueOn(getDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"));
 
         given()
                 .spec(requestSpecification)
