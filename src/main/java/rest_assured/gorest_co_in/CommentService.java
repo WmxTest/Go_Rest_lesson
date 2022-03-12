@@ -1,6 +1,7 @@
 package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.ResponseBody;
 import rest_assured.gorest_co_in.dto.Comment;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static io.restassured.RestAssured.given;
-import static utils.EmailGeneration.generateRandomEmail;
+import static utils.EmailGenerator.generateRandomEmail;
 
 public class CommentService extends BaseRestService {
 
@@ -69,21 +70,17 @@ public class CommentService extends BaseRestService {
         }
     }
 
-    public static void editComment(int commentId) {
-        Comment editedBody = new Comment();
-        editedBody.setEmail("1234@abcd.com");
-        editedBody.setName("Comment name was changed.");
-        editedBody.setBody("New text should be here.");
-
-        given()
+    public static ResponseBody editComment(int commentId, Comment body) {
+       return given()
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .basePath("/v2/comments/" + commentId)
-                .body(editedBody)
+                .body(body)
                 .patch()
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .extract().response().body();
     }
 
     public static void deleteComment(int commentId) {

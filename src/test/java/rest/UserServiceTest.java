@@ -1,13 +1,13 @@
 package rest;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static rest_assured.gorest_co_in.UserService.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTest extends BaseRestTest {
 
     private boolean isUserDeleted = false;

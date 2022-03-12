@@ -1,6 +1,5 @@
 package rest_assured.gorest_co_in.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,17 +10,20 @@ import lombok.Data;
         "id",
         "user_id",
         "title",
-        "body"
+        "due_on",
+        "status"
 })
-
 @Data
-public class Post {
+public class Todo {
+
     @JsonProperty("id")
-    private Integer id;
+    public Integer id;
     @JsonProperty("user_id")
-    private Integer userId;
+    public Integer userId;
     @JsonProperty("title")
-    private String title;
-    @JsonProperty("body")
-    private String body;
+    public String title;
+    @JsonProperty("due_on")
+    public String dueOn;
+    @JsonProperty("status")
+    public String status;
 }

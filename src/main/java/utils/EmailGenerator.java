@@ -5,7 +5,7 @@ package utils;
 
 import java.security.SecureRandom;
 
-public class EmailGeneration {
+public class EmailGenerator {
 
     private static final String CHARS_DIGITS = "0123456789";
     private static final String CHARS_LETTERS = "qwertyuiopasdfghjklzxcvbnm";

@@ -6,7 +6,7 @@ import rest_assured.gorest_co_in.dto.User;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
-import static utils.EmailGeneration.generateRandomEmail;
+import static utils.EmailGenerator.generateRandomEmail;
 
 
 public class UserService extends BaseRestService {
