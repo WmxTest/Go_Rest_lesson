@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static rest_assured.gorest_co_in.TodoService.*;
 import static rest_assured.gorest_co_in.enums.TodoStatuses.PENDING;
 
-
 public class TodoServiceTest extends BaseRestTest {
 
     private static final String TITLE = "changed title";
