@@ -11,6 +11,5 @@ public abstract class BaseRestTest {
 
     @BeforeAll
     public void beforeAll() {
-
     }
 }
