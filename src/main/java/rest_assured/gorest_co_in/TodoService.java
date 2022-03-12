@@ -3,19 +3,22 @@ package rest_assured.gorest_co_in;
 import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.Todo;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static utils.DateGenerator.getDateTime;
 
 public class TodoService extends BaseRestService {
 
-    public static void createTodo(int userId, String status) {
+    public static Todo createTodo(int userId, String status) {
         Todo body = new Todo();
         body.setId(userId);
         body.setStatus(status);
         body.setTitle("test");
         body.setDueOn(getDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"));
 
-        given()
+        return given()
                 .spec(requestSpecification)
                 .basePath("/v2/users/" + userId + "/todos")
                 .contentType(ContentType.JSON)
@@ -29,7 +32,31 @@ public class TodoService extends BaseRestService {
                 .as(Todo.class);
     }
 
-    public static void main(String[] args) {
-        createTodo(3443, "completed");
+    public static List<Todo> getTodos() {
+        return Arrays.asList(given()
+                .spec(requestSpecification)
+                .basePath("/v2/todos")
+                .when()
+                .get()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .as(Todo[].class));
+    }
+
+    public static Todo updateTodo(Todo body) {
+        return given()
+                .spec(requestSpecification)
+                .basePath("/v2/todos/" + body.getId())
+                .contentType(ContentType.JSON)
+                .when()
+                .body(body)
+                .patch()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .as(Todo.class);
     }
 }
