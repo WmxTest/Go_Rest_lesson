@@ -4,8 +4,6 @@ import org.junit.jupiter.api.*;
 import rest_assured.gorest_co_in.PostService;
 import rest_assured.gorest_co_in.UserService;
 
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PostServiceTest extends BaseRestTest {
     private Integer user_Id;
     private Integer post_id;
@@ -20,7 +18,6 @@ public class PostServiceTest extends BaseRestTest {
     public void postShouldBeCreated() {
         Assumptions.assumeTrue(user_Id != null);
         post_id = PostService.createPost(user_Id).getId();
-
     }
 
     @Test
@@ -28,5 +25,4 @@ public class PostServiceTest extends BaseRestTest {
         Assumptions.assumeTrue(post_id != null);
         Assertions.assertTrue(PostService.isPostExist(post_id));
     }
-
 }

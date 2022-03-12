@@ -7,7 +7,6 @@ import rest_assured.gorest_co_in.PostService;
 import rest_assured.gorest_co_in.UserService;
 import rest_assured.gorest_co_in.dto.Comment;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CommentServiceTest extends BaseRestTest {
     private Integer postID;
     private Integer commentId;

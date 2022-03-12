@@ -17,9 +17,9 @@ import static rest_assured.gorest_co_in.enums.TodoStatuses.PENDING;
 
 public class TodoServiceTest extends BaseRestTest {
 
+    private static final String TITLE = "changed title";
     private Integer user_Id;
     private Todo todo;
-    private static final String TITLE = "changed title";
 
     @BeforeAll
     public void setUp() {
