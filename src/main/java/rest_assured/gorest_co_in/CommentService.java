@@ -40,7 +40,8 @@ public class CommentService extends BaseRestService {
                         .then()
                         .assertThat()
                         .statusCode(200)
-                        .extract().body().as(Comment[].class)
+                        .extract()
+                        .as(Comment[].class)
         );
     }
 
@@ -53,7 +54,8 @@ public class CommentService extends BaseRestService {
                         .then()
                         .assertThat()
                         .statusCode(200)
-                        .extract().body().as(Comment[].class)
+                        .extract()
+                        .as(Comment[].class)
         );
     }
 
@@ -71,7 +73,7 @@ public class CommentService extends BaseRestService {
     }
 
     public static ResponseBody editComment(int commentId, Comment body) {
-       return given()
+        return given()
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .basePath("/v2/comments/" + commentId)
