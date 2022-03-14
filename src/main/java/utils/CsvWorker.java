@@ -38,7 +38,7 @@ public class CsvWorker {
         return csvReader;
     }
 
-    public static synchronized String[] readLineByLineFromCsvFile_2() {
+    public static synchronized String[] readLineByLineFromCsvFile_1() {
         try {
             return getCsvReaderInstance().readNext();
         } catch (IOException | CsvValidationException e) {
