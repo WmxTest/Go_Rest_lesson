@@ -83,4 +83,20 @@ public class UserService extends BaseRestService {
             return false;
         }
     }
+
+    public static List<String[]> getUsersList() {
+        List<String[]> users = new ArrayList<>();
+        getUsers().forEach(user -> {
+            String[] arr = new String[5];
+            arr[0] = String.valueOf(user.getMId());
+            arr[1] = user.getMEmail();
+            arr[2] = user.getMGender();
+            arr[3] = user.getMName();
+            arr[4] = user.getMStatus();
+            users.add(arr);
+        });
+        return users;
+    }
+
+
 }
