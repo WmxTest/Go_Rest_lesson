@@ -7,6 +7,7 @@ import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.opencsv.exceptions.CsvValidationException;
+import rest_assured.gorest_co_in.UserService;
 import rest_assured.gorest_co_in.dto.User;
 
 import java.io.*;
@@ -96,8 +97,8 @@ public class CsvWorker {
 
     @SuppressWarnings("all")
     public static void main(String[] args) throws Exception {
-//        FileWriter fileWriter = new FileWriter(FILE_PATH);
-//        writeValue(fileWriter, UserService.getUsers());
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        writeValue(fileWriter, UserService.getUsers());
 
         FileReader fileReader = new FileReader(FILE_PATH);
         List<User> users = readValue(fileReader, User.class, 0);

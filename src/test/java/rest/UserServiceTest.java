@@ -2,6 +2,7 @@ package rest;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import rest_assured.gorest_co_in.dto.User;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +12,7 @@ import static rest_assured.gorest_co_in.UserService.*;
 public class UserServiceTest extends BaseRestTest {
 
     private boolean isUserDeleted = false;
+    private User user;
 
     @Order(1)
     @Test

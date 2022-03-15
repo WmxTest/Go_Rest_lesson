@@ -2,7 +2,6 @@ package rest;
 
 import org.junit.jupiter.api.*;
 import rest_assured.gorest_co_in.PostService;
-import rest_assured.gorest_co_in.UserService;
 
 public class PostServiceTest extends BaseRestTest {
     private Integer user_Id;

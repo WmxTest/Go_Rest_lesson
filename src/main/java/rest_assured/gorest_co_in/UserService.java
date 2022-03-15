@@ -63,7 +63,7 @@ public class UserService extends BaseRestService {
     public static List<User> getUsers() {
         return Arrays.asList(given()
                 .spec(requestSpecification)
-                .header("X-Pagination-Limit", "40")
+//                .header("X-Pagination-Limit", "20")
                 .basePath("/v2/users")
                 .get()
                 .then()
