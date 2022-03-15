@@ -10,7 +10,7 @@ public class PostServiceTest extends BaseRestTest {
 
     @BeforeAll
     public void setUp() {
-        user_Id = UserService.createUser().getMId();
+        user_Id = getUser().getMId();
     }
 
     @Test

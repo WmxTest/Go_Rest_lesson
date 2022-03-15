@@ -22,4 +22,15 @@ public class User {
     @CsvBindByPosition(position = 4)
     @JsonProperty("status")
     private String mStatus;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "mEmail='" + mEmail + '\'' +
+                ", mGender='" + mGender + '\'' +
+                ", mId=" + mId +
+                ", mName='" + mName + '\'' +
+                ", mStatus='" + mStatus + '\'' +
+                '}';
+    }
 }

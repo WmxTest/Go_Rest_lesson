@@ -2,7 +2,9 @@ package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.User;
+import utils.CsvWorker;
 
+import java.io.FileWriter;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
@@ -97,6 +99,4 @@ public class UserService extends BaseRestService {
         });
         return users;
     }
-
-
 }
