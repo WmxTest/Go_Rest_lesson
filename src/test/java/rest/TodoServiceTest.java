@@ -17,20 +17,21 @@ import static rest_assured.gorest_co_in.enums.TodoStatuses.PENDING;
 public class TodoServiceTest extends BaseRestTest {
 
     private static final String TITLE = "changed title";
-    private Integer user_Id;
+    private Integer userId;
     private Todo todo;
 
     @BeforeAll
     public void setUp() {
-        user_Id = UserService.createUser().getMId();
+        userId = getUser().getMId();
+        System.out.println(userId);
     }
 
     @Test
     @Order(1)
     @DisplayName("check new Todo is created")
     public void todoShouldBeCreated() {
-        todo = createTodo(user_Id, PENDING.getStatus());
-        assertEquals(user_Id, todo.getUserId());
+        todo = createTodo(userId, PENDING.getStatus());
+        assertEquals(userId, todo.getUserId());
     }
 
     @Test

@@ -12,11 +12,10 @@ import static rest_assured.gorest_co_in.UserService.getUsers;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseRestTest {
 
-    protected static User user;
     private static Queue<User> users;
 
     @BeforeAll
-    public void beforeAll() {
+    public static void beforeAll() {
         prepareDate();
     }
 

@@ -8,14 +8,15 @@ import rest_assured.gorest_co_in.UserService;
 import rest_assured.gorest_co_in.dto.Comment;
 
 public class CommentServiceTest extends BaseRestTest {
-    private Integer postID;
+    private Integer postId;
     private Integer commentId;
     private Comment editedBody;
 
     @BeforeAll
     public void setUP() {
-        int userID = UserService.createUser().getMId();
-        postID = PostService.createPost(userID).getId();
+        int userId = getUser().getMId();
+        System.out.println(userId);
+        postId = PostService.createPost(userId).getId();
 
         editedBody = new Comment();
         editedBody.setEmail("1234@abcd.com");
@@ -26,22 +27,22 @@ public class CommentServiceTest extends BaseRestTest {
     @Test
     @Order(1)
     public void createNewComment() {
-        Assumptions.assumeTrue(postID != null);
-        commentId = CommentService.createComment(postID).getId();
+        Assumptions.assumeTrue(postId != null);
+        commentId = CommentService.createComment(postId).getId();
     }
 
     @Test
     @Order(2)
     public void checkPublishedComment() {
         Assumptions.assumeTrue(commentId != null);
-        CommentService.isCommentExist(postID, commentId);
+        CommentService.isCommentExist(postId, commentId);
     }
 
     @Test
     @Order(3)
     public void getPostComments() {
-        Assumptions.assumeTrue(postID != null);
-        CommentService.retrievePostComments(postID);
+        Assumptions.assumeTrue(postId != null);
+        CommentService.retrievePostComments(postId);
     }
 
     @Test
