@@ -27,6 +27,13 @@ public abstract class BaseRestTest {
     @SneakyThrows
     public synchronized static void prepareUsers() {
         if (usersQueue == null) {
+            usersQueue = new LinkedList<>(getUsers());
+        }
+    }
+
+    @SneakyThrows
+    public synchronized static void prepareUsers2() {
+        if (usersQueue == null) {
             writeValue(new FileWriter(FILE_PATH), getUsers());
             List<User> users = readValue(new FileReader(FILE_PATH), User.class, 0);
             usersQueue = new LinkedList<>(users);
