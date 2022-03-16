@@ -16,10 +16,10 @@ public abstract class BaseRestTest {
 
     @BeforeAll
     public static void beforeAll() {
-        prepareDate();
+        prepareData();
     }
 
-    private static synchronized void prepareDate() {
+    private static synchronized void prepareData() {
         if (users == null) {
             users = new LinkedList<>(getUsers());
         }
