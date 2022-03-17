@@ -13,7 +13,7 @@ public class CommentServiceTest extends BaseRestTest {
     private Comment editedBody;
 
     @BeforeAll
-    public void setUP() {
+    public void setUp() {
         int userId = getUser().getMId();
         System.out.println(userId);
         postId = PostService.createPost(userId).getId();
