@@ -16,7 +16,6 @@ public class CommentServiceTest extends BaseRestTest {
     @BeforeAll
     public void setUp() {
         int userId = getUser().getMId();
-        System.out.println(userId);
         postId = PostService.createPost(userId).getId();
 
         editedBody = new Comment();
