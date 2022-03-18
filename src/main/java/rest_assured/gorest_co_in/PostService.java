@@ -2,6 +2,7 @@ package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.Post;
+import utils.ValueUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,10 +12,14 @@ import static io.restassured.RestAssured.given;
 
 public class PostService extends BaseRestService {
 
+    @SuppressWarnings("all")
     public static Post createPost(int userId) {
-        Post body = new Post();
-        body.setBody("123456789 Hello world");
-        body.setTitle("My first post");
+//        Post body = new Post();
+//        body.setBody("123456789 Hello world");
+//        body.setTitle("My first post");
+//        body.setUserId(userId);
+
+        Post body = ValueUtils.jsonFileToObject("/post.json", Post.class);
         body.setUserId(userId);
 
         return given()
