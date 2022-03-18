@@ -10,11 +10,9 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static utils.EmailGenerator.generateRandomEmail;
 
-
 public class UserService extends BaseRestService {
 
     public static User createUser() {
-
         Map<String, Object> body = new HashMap<>();
         body.put("name", "Bob");
         body.put("gender", "male");

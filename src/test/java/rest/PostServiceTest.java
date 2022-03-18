@@ -4,24 +4,25 @@ import org.junit.jupiter.api.*;
 import rest_assured.gorest_co_in.PostService;
 
 public class PostServiceTest extends BaseRestTest {
-    private Integer user_Id;
-    private Integer post_id;
+    private Integer userId;
+    private Integer postId;
 
     @BeforeAll
     public void setUp() {
-        user_Id = getUser().getMId();
+        userId = getUser().getMId();
+        System.out.println(userId);
     }
 
     @Test
     @Order(1)
     public void postShouldBeCreated() {
-        Assumptions.assumeTrue(user_Id != null);
-        post_id = PostService.createPost(user_Id).getId();
+        Assumptions.assumeTrue(userId != null);
+        postId = PostService.createPost(userId).getId();
     }
 
     @Test
     public void checkPublishedPost() {
-        Assumptions.assumeTrue(post_id != null);
-        Assertions.assertTrue(PostService.isPostExist(post_id));
+        Assumptions.assumeTrue(postId != null);
+        Assertions.assertTrue(PostService.isPostExists(postId));
     }
 }

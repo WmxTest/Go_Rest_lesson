@@ -6,7 +6,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
-import static utils.PropertyLoader.*;
+import static utils.PropertyLoader.getProperty;
 
 public class BaseRestService {
 
@@ -17,7 +17,7 @@ public class BaseRestService {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         requestSpecification = given()
                 .auth()
-                .oauth2(getProperty("go.rest.token"));
-        requestSpecification.baseUri("https://gorest.co.in/public");
+                .oauth2(getProperty("go.rest.token"))
+                .baseUri("https://gorest.co.in/public");
     }
 }
