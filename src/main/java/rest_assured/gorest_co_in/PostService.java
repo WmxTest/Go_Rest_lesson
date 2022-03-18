@@ -14,11 +14,6 @@ public class PostService extends BaseRestService {
 
     @SuppressWarnings("all")
     public static Post createPost(int userId) {
-//        Post body = new Post();
-//        body.setBody("123456789 Hello world");
-//        body.setTitle("My first post");
-//        body.setUserId(userId);
-
         Post body = ValueUtils.jsonFileToObject("/post.json", Post.class);
         body.setUserId(userId);
 
@@ -41,8 +36,7 @@ public class PostService extends BaseRestService {
                         .get()
                         .then()
                         .assertThat().statusCode(200)
-                        .extract().as(Post[].class)
-        );
+                        .extract().as(Post[].class));
     }
 
     public static boolean isPostExists(int postId) {
