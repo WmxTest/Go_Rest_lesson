@@ -8,7 +8,7 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 import static utils.PropertyLoader.getProperty;
 
-public class BaseRestService {
+public abstract class BaseRestService {
 
     static RequestSpecification requestSpecification;
 
