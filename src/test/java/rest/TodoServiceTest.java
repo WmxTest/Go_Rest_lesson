@@ -22,7 +22,6 @@ public class TodoServiceTest extends BaseRestTest {
     @BeforeAll
     public void setUp() {
         userId = getUser().getMId();
-        System.out.println(userId);
     }
 
     @Test
