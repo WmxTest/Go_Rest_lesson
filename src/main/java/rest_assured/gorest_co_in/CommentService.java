@@ -72,6 +72,7 @@ public class CommentService extends BaseRestService {
         }
     }
 
+    @SuppressWarnings("all")
     public static ResponseBody editComment(int commentId, Comment body) {
         return given()
                 .spec(requestSpecification)

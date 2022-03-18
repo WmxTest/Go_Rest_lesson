@@ -13,16 +13,16 @@ import java.util.List;
 
 public class CsvWorker {
 
-    public static void writeData(List<String[]> body, File file) throws IOException {
-        CSVWriter csvWriter = new CSVWriter(new FileWriter(file));
-        csvWriter.writeAll(body);
-        csvWriter.close();
-    }
-
     private static final String FILE_PATH = "src/main/resources/users.CSV";
     private static CSVReader csvReader;
 
     private CsvWorker() {
+    }
+
+    public static void writeData(List<String[]> body, File file) throws IOException {
+        CSVWriter csvWriter = new CSVWriter(new FileWriter(file));
+        csvWriter.writeAll(body);
+        csvWriter.close();
     }
 
     public static CSVReader getCsvReaderInstance() {

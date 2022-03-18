@@ -40,7 +40,7 @@ public class PostService extends BaseRestService {
         );
     }
 
-    public static boolean isPostExist(int postId) {
+    public static boolean isPostExists(int postId) {
         try {
             getAllPosts()
                     .stream()
