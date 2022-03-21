@@ -51,4 +51,18 @@ public class PostService extends BaseRestService {
             return false;
         }
     }
+
+    public static Post updatePost(int postId, Post body) {
+        return given()
+                .spec(requestSpecification)
+                .contentType(ContentType.JSON)
+                .basePath("/v2/posts/" + postId)
+                .body(body)
+                .patch()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .as(Post.class);
+    }
 }
