@@ -48,8 +48,7 @@ public class UserService extends BaseRestService {
     public static void deleteUser(User user) {
         given()
                 .spec(requestSpecification)
-                .basePath("/v2/users/" + user.getMId())
-                .delete()
+                .delete("/v2/users/{userId}", user.getMId())
                 .then()
                 .assertThat()
                 .statusLine("HTTP/1.1 204 No Content");

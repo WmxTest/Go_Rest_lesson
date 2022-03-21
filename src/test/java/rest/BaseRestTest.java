@@ -17,7 +17,7 @@ public abstract class BaseRestTest {
 
     @BeforeAll
     public static void beforeAll() {
-        prepareData2();
+        prepareData();
     }
 
     //list of users from http request
