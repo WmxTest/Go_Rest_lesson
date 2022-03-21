@@ -2,9 +2,7 @@ package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.User;
-import utils.CsvWorker;
 
-import java.io.FileWriter;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
@@ -37,10 +35,9 @@ public class UserService extends BaseRestService {
 
         return given()
                 .spec(requestSpecification)
-                .basePath("/v2/users/" + user.getMId())
                 .contentType(ContentType.JSON)
                 .body(user)
-                .put()
+                .put("/v2/users/{getMId}", user.getMId())
                 .then()
                 .assertThat()
                 .statusCode(200)
@@ -61,7 +58,6 @@ public class UserService extends BaseRestService {
     public static List<User> getUsers() {
         return Arrays.asList(given()
                 .spec(requestSpecification)
-//                .header("X-Pagination-Limit", "20")
                 .basePath("/v2/users")
                 .get()
                 .then()
