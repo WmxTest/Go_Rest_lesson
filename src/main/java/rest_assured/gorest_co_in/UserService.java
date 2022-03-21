@@ -37,7 +37,7 @@ public class UserService extends BaseRestService {
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .body(user)
-                .put("/v2/users/{getMId}", user.getMId())
+                .put("/v2/users/{userId}", user.getMId())
                 .then()
                 .assertThat()
                 .statusCode(200)
