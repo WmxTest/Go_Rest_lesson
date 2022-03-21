@@ -25,6 +25,10 @@ public abstract class BaseRestTest {
         }
     }
 
+    private static synchronized void prepareData2() {
+
+    }
+
     protected static synchronized User getUser() {
         return users.poll();
     }
