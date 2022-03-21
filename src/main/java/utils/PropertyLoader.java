@@ -8,8 +8,8 @@ import java.util.Properties;
 
 public class PropertyLoader {
 
-    private static Properties properties;
     private static final String PATH = "src/main/resources/application.properties";
+    private static Properties properties;
 
     private PropertyLoader() {
 
@@ -22,12 +22,12 @@ public class PropertyLoader {
     }
 
     public static synchronized String getProperty(String propertyName) {
-        if(properties == null) {
+        if (properties == null) {
             System.out.println(Thread.currentThread().getName());
             loadProperty();
         }
         String value = properties.getProperty(propertyName);
-        if(value != null) {
+        if (value != null) {
             return value;
         } else {
             throw new IllegalArgumentException(String.format("Property %s is not exist", propertyName));

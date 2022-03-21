@@ -2,7 +2,6 @@ package rest;
 
 import org.junit.jupiter.api.*;
 import rest_assured.gorest_co_in.PostService;
-import rest_assured.gorest_co_in.UserService;
 
 public class PostServiceTest extends BaseRestTest {
     private Integer userId;
@@ -11,7 +10,6 @@ public class PostServiceTest extends BaseRestTest {
     @BeforeAll
     public void setUp() {
         userId = getUser().getMId();
-        System.out.println(userId);
     }
 
     @Test
@@ -24,6 +22,6 @@ public class PostServiceTest extends BaseRestTest {
     @Test
     public void checkPublishedPost() {
         Assumptions.assumeTrue(postId != null);
-        Assertions.assertTrue(PostService.isPostExist(postId));
+        Assertions.assertTrue(PostService.isPostExists(postId));
     }
 }

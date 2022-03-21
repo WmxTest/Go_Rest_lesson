@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import rest_assured.gorest_co_in.UserService;
 import rest_assured.gorest_co_in.dto.Todo;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,7 +22,6 @@ public class TodoServiceTest extends BaseRestTest {
     @BeforeAll
     public void setUp() {
         userId = getUser().getMId();
-        System.out.println(userId);
     }
 
     @Test

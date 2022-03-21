@@ -4,8 +4,9 @@ import io.restassured.response.ResponseBody;
 import org.junit.jupiter.api.*;
 import rest_assured.gorest_co_in.CommentService;
 import rest_assured.gorest_co_in.PostService;
-import rest_assured.gorest_co_in.UserService;
 import rest_assured.gorest_co_in.dto.Comment;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommentServiceTest extends BaseRestTest {
     private Integer postId;
@@ -15,7 +16,6 @@ public class CommentServiceTest extends BaseRestTest {
     @BeforeAll
     public void setUp() {
         int userId = getUser().getMId();
-        System.out.println(userId);
         postId = PostService.createPost(userId).getId();
 
         editedBody = new Comment();
@@ -35,7 +35,7 @@ public class CommentServiceTest extends BaseRestTest {
     @Order(2)
     public void checkPublishedComment() {
         Assumptions.assumeTrue(commentId != null);
-        CommentService.isCommentExist(postId, commentId);
+        assertTrue(CommentService.isCommentExist(postId, commentId));
     }
 
     @Test

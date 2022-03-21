@@ -2,17 +2,17 @@ package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
 import rest_assured.gorest_co_in.dto.User;
+import utils.CsvWorker;
 
+import java.io.FileWriter;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static utils.EmailGenerator.generateRandomEmail;
 
-
 public class UserService extends BaseRestService {
 
     public static User createUser() {
-
         Map<String, Object> body = new HashMap<>();
         body.put("name", "Bob");
         body.put("gender", "male");
@@ -61,7 +61,7 @@ public class UserService extends BaseRestService {
     public static List<User> getUsers() {
         return Arrays.asList(given()
                 .spec(requestSpecification)
-                .header("X-Pagination-Limit", "40")
+//                .header("X-Pagination-Limit", "20")
                 .basePath("/v2/users")
                 .get()
                 .then()
@@ -97,6 +97,4 @@ public class UserService extends BaseRestService {
         });
         return users;
     }
-
-
 }
