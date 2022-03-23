@@ -1,6 +1,7 @@
 package rest_assured.gorest_co_in;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.ResponseBody;
 import rest_assured.gorest_co_in.dto.Post;
 import utils.ValueUtils;
 
@@ -26,6 +27,18 @@ public class PostService extends BaseRestService {
                 .then()
                 .assertThat().statusCode(201)
                 .extract().as(Post.class);
+    }
+
+    public static ResponseBody createPostNegativeCase(Post body, String statusMessage) {
+       return given()
+                .spec(requestSpecification)
+                .contentType(ContentType.JSON)
+                .basePath("/v2/users/" + body.getUserId() + "/posts")
+                .body(body)
+                .post()
+                .then()
+                .assertThat().statusLine(statusMessage)
+                .extract().response().body();
     }
 
     public static List<Post> getAllPosts() {
