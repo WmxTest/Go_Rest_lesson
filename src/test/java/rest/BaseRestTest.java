@@ -20,12 +20,14 @@ public abstract class BaseRestTest {
         prepareData();
     }
 
+    //list of users from http request
     private static synchronized void prepareData() {
         if (users == null) {
             users = new LinkedList<>(getUsers());
         }
     }
 
+    //list of users from csv file
     private static synchronized void prepareData2() {
         if (users == null) {
             users = new LinkedList<>(CsvWorker.getObjectList(User.class, 0));
