@@ -54,3 +54,33 @@ public class PostServiceTest extends BaseRestTest {
         Assertions.assertEquals(response, responseBody.asString());
     }
 }
+
+/*
+1)
+Map<String,String> map = new HashMap<>();
+map.put("field","user");
+map.put("message","must exist");
+
+Map<String, String> responseMap = responseBody.jsonPath().getMap("[0]");
+map.equals(responseMap); --> will return true
+
+2)
+[
+    {
+        "field":"user",
+        "message":"must exist"
+
+    },
+    {
+        "field":"title",
+        "message":"can't be blank"
+
+    }
+]
+
+responseBody.path("[0]").toString() will be extracted -->
+   {
+        "field":"user",
+        "message":"must exist"
+    }
+*/
