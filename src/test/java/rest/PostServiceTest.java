@@ -1,12 +1,15 @@
 package rest;
 
 import io.restassured.response.ResponseBody;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import rest_assured.gorest_co_in.PostService;
 import rest_assured.gorest_co_in.dto.Post;
+import rest_assured.gorest_co_in.dto.PostNegative;
 import utils.ValueUtils;
 
 import java.util.stream.Stream;
@@ -14,7 +17,7 @@ import java.util.stream.Stream;
 @SuppressWarnings("all")
 public class PostServiceTest extends BaseRestTest {
     private Integer userId;
-    private Integer postId;
+    private Post postBody;
 
     public static Stream<Arguments> testDataProvider() {
         Post requestBody1 = ValueUtils.jsonFileToObject("/post.json", Post.class);
@@ -38,13 +41,13 @@ public class PostServiceTest extends BaseRestTest {
     @Order(1)
     public void postShouldBeCreated() {
         Assumptions.assumeTrue(userId != null);
-        postId = PostService.createPost(userId).getId();
+        postBody = PostService.createPost(userId);
     }
 
     @Test
     public void checkPublishedPost() {
-        Assumptions.assumeTrue(postId != null);
-        Assertions.assertTrue(PostService.isPostExists(postId));
+        Assumptions.assumeTrue(postBody != null);
+        Assertions.assertTrue(PostService.isPostExists(postBody.getId()));
     }
 
     @ParameterizedTest
@@ -52,6 +55,32 @@ public class PostServiceTest extends BaseRestTest {
     public void checkNegativeCases(Post requestBody, String statusMessage, String response) {
         ResponseBody responseBody = PostService.createPostNegativeCase(requestBody, statusMessage);
         Assertions.assertEquals(response, responseBody.asString());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "changed", "123345","\""})
+    public void checkPostIsUbtated(String title) {
+        Assumptions.assumeTrue(postBody != null);
+        String body = "111";
+        postBody.setTitle(title);
+        postBody.setBody(body);
+        Post responseBody = PostService.updatePost(postBody, Post.class,200);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(responseBody.getTitle()).isEqualTo(title);
+        softAssertions.assertThat(responseBody.getBody()).isEqualTo(body);
+        softAssertions.assertAll();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { " " , ""})
+    public void checkPostIsUbtatedNegative(String title) {
+        Assumptions.assumeTrue(postBody != null);
+        postBody.setTitle(title);
+        PostNegative[] responseBody = PostService.updatePost(postBody, PostNegative[].class, 422);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(responseBody[0].getField()).isEqualTo("title");
+        softAssertions.assertThat(responseBody[0].getMessage()).isEqualTo("can't be blank");
+        softAssertions.assertAll();
     }
 }
 
