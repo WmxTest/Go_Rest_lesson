@@ -59,7 +59,7 @@ public class PostServiceTest extends BaseRestTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"changed", "123345", "\""})
-    public void checkPostIsUbtated(String title) {
+    public void checkPostIsUpdated(String title) {
         Assumptions.assumeTrue(postBody != null);
         String body = "111";
         postBody.setTitle(title);
@@ -73,7 +73,7 @@ public class PostServiceTest extends BaseRestTest {
 
     @ParameterizedTest
     @ValueSource(strings = {" ", ""})
-    public void checkPostIsUbtatedNegative(String title) {
+    public void checkPostIsUpdatedNegative(String title) {
         Assumptions.assumeTrue(postBody != null);
         postBody.setTitle(title);
         PostNegative[] responseBody = PostService.updatePost(postBody, PostNegative[].class, 422);
