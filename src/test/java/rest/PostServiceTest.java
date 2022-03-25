@@ -58,13 +58,13 @@ public class PostServiceTest extends BaseRestTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "changed", "123345","\""})
+    @ValueSource(strings = {"changed", "123345", "\""})
     public void checkPostIsUbtated(String title) {
         Assumptions.assumeTrue(postBody != null);
         String body = "111";
         postBody.setTitle(title);
         postBody.setBody(body);
-        Post responseBody = PostService.updatePost(postBody, Post.class,200);
+        Post responseBody = PostService.updatePost(postBody, Post.class, 200);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(responseBody.getTitle()).isEqualTo(title);
         softAssertions.assertThat(responseBody.getBody()).isEqualTo(body);
@@ -72,7 +72,7 @@ public class PostServiceTest extends BaseRestTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { " " , ""})
+    @ValueSource(strings = {" ", ""})
     public void checkPostIsUbtatedNegative(String title) {
         Assumptions.assumeTrue(postBody != null);
         postBody.setTitle(title);
