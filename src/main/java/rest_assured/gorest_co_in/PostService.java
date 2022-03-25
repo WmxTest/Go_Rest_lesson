@@ -30,7 +30,7 @@ public class PostService extends BaseRestService {
     }
 
     public static ResponseBody createPostNegativeCase(Post body, String statusMessage) {
-       return given()
+        return given()
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .basePath("/v2/users/" + body.getUserId() + "/posts")
@@ -65,17 +65,17 @@ public class PostService extends BaseRestService {
         }
     }
 
-    public static Post updatePost(int postId, Post body) {
+    public static <BODY> BODY updatePost(Post body, Class<BODY> cls, int statusCode) {
         return given()
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
-                .basePath("/v2/posts/" + postId)
+                .basePath("/v2/posts/" + body.getId())
                 .body(body)
                 .patch()
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(statusCode)
                 .extract()
-                .as(Post.class);
+                .as(cls);
     }
 }
