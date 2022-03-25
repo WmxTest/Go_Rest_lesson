@@ -69,12 +69,10 @@ map.equals(responseMap); --> will return true
     {
         "field":"user",
         "message":"must exist"
-
     },
     {
         "field":"title",
         "message":"can't be blank"
-
     }
 ]
 
