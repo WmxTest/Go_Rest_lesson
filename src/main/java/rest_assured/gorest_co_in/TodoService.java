@@ -26,10 +26,8 @@ public class TodoService extends BaseRestService {
                 .body(body)
                 .post()
                 .then()
-                .assertThat()
                 .statusCode(201)
-                .extract()
-                .as(Todo.class);
+                .extract().as(Todo.class);
     }
 
     public static List<Todo> getTodos() {
@@ -39,10 +37,8 @@ public class TodoService extends BaseRestService {
                 .when()
                 .get()
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(Todo[].class));
+                .extract().as(Todo[].class));
     }
 
     public static Todo updateTodo(Todo body) {
@@ -54,9 +50,7 @@ public class TodoService extends BaseRestService {
                 .body(body)
                 .patch()
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(Todo.class);
+                .extract().as(Todo.class);
     }
 }
