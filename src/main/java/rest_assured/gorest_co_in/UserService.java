@@ -24,10 +24,8 @@ public class UserService extends BaseRestService {
                 .body(body)
                 .post()
                 .then()
-                .assertThat()
                 .statusCode(201)
-                .extract()
-                .as(User.class);
+                .extract().as(User.class);
     }
 
     public static User updateUser(User user) {
@@ -39,10 +37,8 @@ public class UserService extends BaseRestService {
                 .body(user)
                 .put("/v2/users/{userId}", user.getMId())
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(User.class);
+                .extract().as(User.class);
     }
 
     public static void deleteUser(User user) {
@@ -50,7 +46,6 @@ public class UserService extends BaseRestService {
                 .spec(requestSpecification)
                 .delete("/v2/users/{userId}", user.getMId())
                 .then()
-                .assertThat()
                 .statusLine("HTTP/1.1 204 No Content");
     }
 
@@ -60,10 +55,8 @@ public class UserService extends BaseRestService {
                 .basePath("/v2/users")
                 .get()
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(User[].class));
+                .extract().as(User[].class));
     }
 
     public static boolean isUserExists(int userId) {
