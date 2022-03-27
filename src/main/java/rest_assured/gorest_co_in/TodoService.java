@@ -22,7 +22,6 @@ public class TodoService extends BaseRestService {
                 .spec(requestSpecification)
                 .basePath("/v2/users/" + userId + "/todos")
                 .contentType(ContentType.JSON)
-                .when()
                 .body(body)
                 .post()
                 .then()
@@ -34,7 +33,6 @@ public class TodoService extends BaseRestService {
         return Arrays.asList(given()
                 .spec(requestSpecification)
                 .basePath("/v2/todos")
-                .when()
                 .get()
                 .then()
                 .statusCode(200)
@@ -46,11 +44,18 @@ public class TodoService extends BaseRestService {
                 .spec(requestSpecification)
                 .basePath("/v2/todos/" + body.getId())
                 .contentType(ContentType.JSON)
-                .when()
                 .body(body)
                 .patch()
                 .then()
                 .statusCode(200)
                 .extract().as(Todo.class);
+    }
+
+    public static void deleteSingleToDo(int toDo) {
+        given()
+                .spec(requestSpecification)
+                .delete("/v2/todos/" + toDo)
+                .then()
+                .statusCode(204);
     }
 }
