@@ -69,4 +69,5 @@ public class TodoServiceTest extends BaseRestTest {
         Assumptions.assumeTrue(todo != null);
         TodoService.deleteSingleToDo(todo.getId());
     }
+
 }

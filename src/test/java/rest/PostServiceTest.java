@@ -5,6 +5,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import rest_assured.gorest_co_in.PostService;
@@ -50,6 +51,7 @@ public class PostServiceTest extends BaseRestTest {
     }
 
     @Test
+    @Order(2)
     public void checkPublishedPost() {
         Assumptions.assumeTrue(postBody != null);
         Assertions.assertTrue(PostService.isPostExists(postBody.getId()));
@@ -57,6 +59,7 @@ public class PostServiceTest extends BaseRestTest {
 
     @ParameterizedTest
     @MethodSource("testDataProvider")
+    @Order(2)
     public void checkNegativeCases(Post requestBody, String statusMessage, String response) {
         ResponseBody responseBody = PostService.createPostNegativeCase(requestBody, statusMessage);
         Assertions.assertEquals(response, responseBody.asString());
@@ -64,6 +67,7 @@ public class PostServiceTest extends BaseRestTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"changed", "123345", "\""})
+    @Order(2)
     public void checkPostIsUpdated(String title) {
         Assumptions.assumeTrue(postBody != null);
         String body = "111";
@@ -77,7 +81,23 @@ public class PostServiceTest extends BaseRestTest {
     }
 
     @ParameterizedTest
+    @Order(2)
+//    @CsvFileSource(files = "src/main/resources/posts.CSV", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/posts.CSV", numLinesToSkip = 1)
+    public void checkPostIsUpdatedCSVProvider(String title, String body) {
+        Assumptions.assumeTrue(postBody != null);
+        postBody.setTitle(title);
+        postBody.setBody(body);
+        Post responseBody = PostService.updatePost(postBody, Post.class, 200);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(responseBody.getTitle()).isEqualTo(title);
+        softAssertions.assertThat(responseBody.getBody()).isEqualTo(body);
+        softAssertions.assertAll();
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {" ", ""})
+    @Order(2)
     public void checkPostIsUpdatedNegative(String title) {
         Assumptions.assumeTrue(postBody != null);
         postBody.setTitle(title);
@@ -86,6 +106,15 @@ public class PostServiceTest extends BaseRestTest {
         softAssertions.assertThat(responseBody[0].getField()).isEqualTo("title");
         softAssertions.assertThat(responseBody[0].getMessage()).isEqualTo("can't be blank");
         softAssertions.assertAll();
+    }
+
+    @Test
+    @Order(3)
+    public void checkPostDeleted() {
+        Assumptions.assumeTrue(postBody != null);
+        int postId = postBody.getId();
+        PostService.deletePost(postId);
+        Assertions.assertFalse(PostService.isPostExists(postId));
     }
 }
 
