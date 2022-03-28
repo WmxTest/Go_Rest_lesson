@@ -27,9 +27,14 @@ public class PostServiceTest extends BaseRestTest {
         requestBody2.setUserId(getUser().getMId());
         requestBody2.setTitle(null);
 
+        Post requestBody3 = ValueUtils.jsonFileToObject("/post.json", Post.class);
+        requestBody3.setUserId(getUser().getMId());
+        requestBody3.setBody(null);
+
         return Stream.of(
                 Arguments.of(requestBody1, "HTTP/1.1 422 Unprocessable Entity", "[{\"field\":\"user\",\"message\":\"must exist\"}]"),
-                Arguments.of(requestBody2, "HTTP/1.1 422 Unprocessable Entity", "[{\"field\":\"title\",\"message\":\"can't be blank\"}]"));
+                Arguments.of(requestBody2, "HTTP/1.1 422 Unprocessable Entity", "[{\"field\":\"title\",\"message\":\"can't be blank\"}]"),
+                Arguments.of(requestBody3, "HTTP/1.1 422 Unprocessable Entity", "[{\"field\":\"body\",\"message\":\"can't be blank\"}]"));
     }
 
     @BeforeAll

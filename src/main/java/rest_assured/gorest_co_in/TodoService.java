@@ -22,27 +22,21 @@ public class TodoService extends BaseRestService {
                 .spec(requestSpecification)
                 .basePath("/v2/users/" + userId + "/todos")
                 .contentType(ContentType.JSON)
-                .when()
                 .body(body)
                 .post()
                 .then()
-                .assertThat()
                 .statusCode(201)
-                .extract()
-                .as(Todo.class);
+                .extract().as(Todo.class);
     }
 
     public static List<Todo> getTodos() {
         return Arrays.asList(given()
                 .spec(requestSpecification)
                 .basePath("/v2/todos")
-                .when()
                 .get()
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(Todo[].class));
+                .extract().as(Todo[].class));
     }
 
     public static Todo updateTodo(Todo body) {
@@ -50,13 +44,18 @@ public class TodoService extends BaseRestService {
                 .spec(requestSpecification)
                 .basePath("/v2/todos/" + body.getId())
                 .contentType(ContentType.JSON)
-                .when()
                 .body(body)
                 .patch()
                 .then()
-                .assertThat()
                 .statusCode(200)
-                .extract()
-                .as(Todo.class);
+                .extract().as(Todo.class);
+    }
+
+    public static void deleteSingleToDo(int toDo) {
+        given()
+                .spec(requestSpecification)
+                .delete("/v2/todos/" + toDo)
+                .then()
+                .statusCode(204);
     }
 }

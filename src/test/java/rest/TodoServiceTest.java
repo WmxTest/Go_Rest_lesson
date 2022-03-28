@@ -1,17 +1,16 @@
 package rest;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import rest_assured.gorest_co_in.TodoService;
 import rest_assured.gorest_co_in.dto.Todo;
+import rest_assured.gorest_co_in.enums.TodoStatuses;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static rest_assured.gorest_co_in.TodoService.*;
-import static rest_assured.gorest_co_in.enums.TodoStatuses.PENDING;
 
 public class TodoServiceTest extends BaseRestTest {
 
@@ -24,12 +23,27 @@ public class TodoServiceTest extends BaseRestTest {
         userId = getUser().getMId();
     }
 
-    @Test
-    @Order(1)
-    @DisplayName("check new Todo is created")
-    public void todoShouldBeCreated() {
-        todo = createTodo(userId, PENDING.getStatus());
-        assertEquals(userId, todo.getUserId());
+//    @Test
+//    @Order(1)
+//    @DisplayName("check new Todo is created")
+//    public void todoShouldBeCreated() {
+//        todo = createTodo(userId, PENDING.getStatus());
+//        assertEquals(userId, todo.getUserId());
+//    }
+
+    @ParameterizedTest
+    @Order(2)
+    @EnumSource(TodoStatuses.class)
+    public void creationTodoWithEnumSource(TodoStatuses statuses) {
+        todo = createTodo(userId, statuses.getStatus());
+        assertEquals(todo.getStatus(), statuses.getStatus());
+    }
+
+    @ParameterizedTest
+    @EnumSource(names = {"PENDING"})
+    public void creationTodoWithSpecifiedEnumValues(TodoStatuses statuses) {
+        todo = createTodo(userId, statuses.getStatus());
+        assertEquals(todo.getStatus(), statuses.getStatus());
     }
 
     @Test
@@ -48,5 +62,11 @@ public class TodoServiceTest extends BaseRestTest {
     public void updateCreatedTodo() {
         todo.setTitle(TITLE);
         assertEquals(TITLE, updateTodo(todo).getTitle());
+    }
+
+    @Test
+    public void deleteTodoItem() {
+        Assumptions.assumeTrue(todo != null);
+        TodoService.deleteSingleToDo(todo.getId());
     }
 }

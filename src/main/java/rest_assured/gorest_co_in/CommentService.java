@@ -26,7 +26,6 @@ public class CommentService extends BaseRestService {
                 .body(comment)
                 .post()
                 .then()
-                .assertThat()
                 .statusCode(201)
                 .extract().as(Comment.class);
     }
@@ -38,11 +37,8 @@ public class CommentService extends BaseRestService {
                         .basePath("v2/comments")
                         .get()
                         .then()
-                        .assertThat()
                         .statusCode(200)
-                        .extract()
-                        .as(Comment[].class)
-        );
+                        .extract().as(Comment[].class));
     }
 
     public static List<Comment> retrievePostComments(int postId) {
@@ -52,11 +48,8 @@ public class CommentService extends BaseRestService {
                         .basePath("v2/posts/" + postId + "/comments")
                         .get()
                         .then()
-                        .assertThat()
-                        .statusCode(200)
-                        .extract()
-                        .as(Comment[].class)
-        );
+                        .assertThat().statusCode(200)
+                        .extract().as(Comment[].class));
     }
 
     public static boolean isCommentExist(int postId, int commentId) {
@@ -81,9 +74,7 @@ public class CommentService extends BaseRestService {
                 .body(body)
                 .patch()
                 .then()
-                .assertThat()
-                .statusCode(200)
-                .extract().response().body();
+                .statusCode(200).extract().response().body();
     }
 
     public static void deleteComment(int commentId) {
@@ -92,7 +83,6 @@ public class CommentService extends BaseRestService {
                 .basePath("/v2/comments/" + commentId)
                 .delete()
                 .then()
-                .assertThat()
                 .statusCode(204);
     }
 }

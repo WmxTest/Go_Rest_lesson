@@ -25,7 +25,7 @@ public class PostService extends BaseRestService {
                 .body(body)
                 .post()
                 .then()
-                .assertThat().statusCode(201)
+                .statusCode(201)
                 .extract().as(Post.class);
     }
 
@@ -37,7 +37,7 @@ public class PostService extends BaseRestService {
                 .body(body)
                 .post()
                 .then()
-                .assertThat().statusLine(statusMessage)
+                .statusLine(statusMessage)
                 .extract().response().body();
     }
 
@@ -48,7 +48,7 @@ public class PostService extends BaseRestService {
                         .basePath("/v2/posts")
                         .get()
                         .then()
-                        .assertThat().statusCode(200)
+                        .statusCode(200)
                         .extract().as(Post[].class));
     }
 
@@ -73,9 +73,7 @@ public class PostService extends BaseRestService {
                 .body(body)
                 .patch()
                 .then()
-                .assertThat()
                 .statusCode(statusCode)
-                .extract()
-                .as(cls);
+                .extract().as(cls);
     }
 }
