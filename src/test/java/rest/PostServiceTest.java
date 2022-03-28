@@ -113,6 +113,7 @@ public class PostServiceTest extends BaseRestTest {
     public void checkPostDeleted() {
         Assumptions.assumeTrue(postBody != null);
         int postId = postBody.getId();
+        PostService.deletePost(postId);
         Assertions.assertFalse(PostService.isPostExists(postId));
     }
 }
