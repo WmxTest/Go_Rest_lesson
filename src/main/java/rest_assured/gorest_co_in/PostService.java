@@ -76,4 +76,14 @@ public class PostService extends BaseRestService {
                 .statusCode(statusCode)
                 .extract().as(cls);
     }
+
+    public static void deletePost(int postId) {
+        given()
+                .spec(requestSpecification)
+                .contentType(ContentType.JSON)
+                .basePath("/v2/posts/" + postId)
+                .delete()
+                .then()
+                .statusCode(204);
+    }
 }
