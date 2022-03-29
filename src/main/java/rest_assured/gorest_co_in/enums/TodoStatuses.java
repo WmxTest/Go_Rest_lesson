@@ -9,5 +9,5 @@ public enum TodoStatuses {
     PENDING("pending"),
     COMPLETED("completed");
 
-    private String status;
+    private final String status;
 }
