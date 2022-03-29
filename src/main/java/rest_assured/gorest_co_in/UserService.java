@@ -28,6 +28,7 @@ public class UserService extends BaseRestService {
                 .extract().as(User.class);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static User updateUser(User user) {
         user.setMName("Alice");
 

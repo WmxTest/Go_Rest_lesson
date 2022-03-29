@@ -15,11 +15,11 @@ import utils.ValueUtils;
 
 import java.util.stream.Stream;
 
-@SuppressWarnings("all")
 public class PostServiceTest extends BaseRestTest {
     private Integer userId;
     private Post postBody;
 
+    @SuppressWarnings("ConstantConditions")
     public static Stream<Arguments> testDataProvider() {
         Post requestBody1 = ValueUtils.jsonFileToObject("/post.json", Post.class);
         requestBody1.setUserId(123456789);
@@ -57,6 +57,7 @@ public class PostServiceTest extends BaseRestTest {
         Assertions.assertTrue(PostService.isPostExists(postBody.getId()));
     }
 
+    @SuppressWarnings("rawtypes")
     @ParameterizedTest
     @MethodSource("testDataProvider")
     @Order(2)

@@ -45,8 +45,8 @@ public class CommentServiceTest extends BaseRestTest {
         CommentService.retrievePostComments(postId);
     }
 
+    @SuppressWarnings("rawtypes")
     @Test
-    @SuppressWarnings("all")
     @Order(4)
     public void changeComment() {
         Assumptions.assumeTrue(commentId != null);

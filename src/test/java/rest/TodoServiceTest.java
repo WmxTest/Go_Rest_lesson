@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static rest_assured.gorest_co_in.TodoService.*;
+import static rest_assured.gorest_co_in.enums.TodoStatuses.PENDING;
 
 public class TodoServiceTest extends BaseRestTest {
 
@@ -23,13 +24,13 @@ public class TodoServiceTest extends BaseRestTest {
         userId = getUser().getMId();
     }
 
-//    @Test
-//    @Order(1)
-//    @DisplayName("check new Todo is created")
-//    public void todoShouldBeCreated() {
-//        todo = createTodo(userId, PENDING.getStatus());
-//        assertEquals(userId, todo.getUserId());
-//    }
+    @Test
+    @Order(1)
+    @DisplayName("check new Todo is created")
+    public void todoShouldBeCreated() {
+        todo = createTodo(userId, PENDING.getStatus());
+        assertEquals(userId, todo.getUserId());
+    }
 
     @ParameterizedTest
     @Order(2)
@@ -69,5 +70,4 @@ public class TodoServiceTest extends BaseRestTest {
         Assumptions.assumeTrue(todo != null);
         TodoService.deleteSingleToDo(todo.getId());
     }
-
 }

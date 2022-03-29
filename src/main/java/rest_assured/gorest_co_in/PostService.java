@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 
 public class PostService extends BaseRestService {
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("ConstantConditions")
     public static Post createPost(int userId) {
         Post body = ValueUtils.jsonFileToObject("/post.json", Post.class);
         body.setUserId(userId);
@@ -29,6 +29,7 @@ public class PostService extends BaseRestService {
                 .extract().as(Post.class);
     }
 
+    @SuppressWarnings("rawtypes")
     public static ResponseBody createPostNegativeCase(Post body, String statusMessage) {
         return given()
                 .spec(requestSpecification)
