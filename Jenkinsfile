@@ -39,6 +39,7 @@ pipeline {
                               b: {
                                 sh 'mvn clean test'
                               }
+                        )
                     }
                 }
                 echo 'test'
