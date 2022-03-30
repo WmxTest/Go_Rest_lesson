@@ -27,11 +27,11 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    if ('amount' == 'one') {
-                        echo 'test 1'
+                    if (amount.equals("one")) {
+                        echo 'one thread'
                         sh 'mvn clean test'
                     } else {
-                        echo 'test 2'
+                        echo 'two threads'
                         parallel(
                               a: {
                                 sh 'mvn clean test'
@@ -42,8 +42,6 @@ pipeline {
                         )
                     }
                 }
-                echo 'test'
-                sh 'mvn clean test'
             }
         }
     }
