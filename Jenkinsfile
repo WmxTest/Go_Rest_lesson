@@ -4,15 +4,15 @@ pipeline {
         maven 'MAVEN_HOME'
     }
     stages {
-        stage('checkout') {
+        stage('clone code') {
             steps {
-                echo 'checkout'
+                echo 'git'
                 git branch: 'ci_test', credentialsId: 'e77e5a08-1b3e-45f7-9b90-ae0973b08ac4', url: 'https://github.com/WmxTest/Go_Rest_lesson.git'
             }
         }
-        stage('Test') {
+        stage('build code') {
             steps {
-                echo 'Test'
+                echo 'test'
                 sh 'mvn clean test'
             }
         }
