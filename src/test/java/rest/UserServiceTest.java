@@ -2,6 +2,7 @@ package rest;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import rest_assured.gorest_co_in.dto.User;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -47,5 +48,10 @@ public class UserServiceTest extends BaseRestTest {
     public void userShouldNotExist() {
         assumeTrue(isUserDeleted);
         assertFalse(isUserExists(user.getMId()));
+    }
+
+    @ParameterizedTest
+    public void createUserNegativeCase(){
+
     }
 }
