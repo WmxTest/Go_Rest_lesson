@@ -72,6 +72,8 @@ public class CsvWorker {
             return null;
         }
     }
+
+    @SuppressWarnings("ConstantConditions")
     public static <T> List<T> getObjectList(Class<T> cls, int skippedLines) {
         List<T> list;
         ColumnPositionMappingStrategy<T> mappingStrategy = new ColumnPositionMappingStrategy<>();

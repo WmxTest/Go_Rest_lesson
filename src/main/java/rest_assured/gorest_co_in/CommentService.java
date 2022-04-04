@@ -30,6 +30,18 @@ public class CommentService extends BaseRestService {
                 .extract().as(Comment.class);
     }
 
+    public static <NEGATIVE_BODY> NEGATIVE_BODY createCommentNegative(int postId, String statusLine, Class<NEGATIVE_BODY> cls, Comment comment) {
+        return given()
+                .spec(requestSpecification)
+                .basePath("v2/posts/" + postId + "/comments")
+                .contentType(ContentType.JSON)
+                .body(comment)
+                .post()
+                .then()
+                .statusLine(statusLine)
+                .extract().as(cls);
+    }
+
     public static List<Comment> getAllComments() {
         return Arrays.asList(
                 given()
@@ -85,4 +97,6 @@ public class CommentService extends BaseRestService {
                 .then()
                 .statusCode(204);
     }
+
+
 }
