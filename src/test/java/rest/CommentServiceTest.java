@@ -2,9 +2,12 @@ package rest;
 
 import io.restassured.response.ResponseBody;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import rest_assured.gorest_co_in.CommentService;
 import rest_assured.gorest_co_in.PostService;
 import rest_assured.gorest_co_in.dto.Comment;
+import rest_assured.gorest_co_in.dto.PostNegative;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,7 +20,6 @@ public class CommentServiceTest extends BaseRestTest {
     public void setUp() {
         int userId = getUser().getMId();
         postId = PostService.createPost(userId).getId();
-
         editedBody = new Comment();
         editedBody.setEmail("1234@abcd.com");
         editedBody.setName("Comment name was changed.");
@@ -59,5 +61,13 @@ public class CommentServiceTest extends BaseRestTest {
     public void deleteComment() {
         Assumptions.assumeTrue(commentId != null);
         CommentService.deleteComment(commentId);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-2, 999999, 0})
+    public void createNewCommentNegative(int postId) {
+        CommentService.createCommentNegative(postId, "HTTP/1.1 422 Unprocessable Entity", PostNegative[].class, editedBody);
+
+
     }
 }
