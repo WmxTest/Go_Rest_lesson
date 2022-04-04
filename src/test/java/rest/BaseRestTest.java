@@ -1,7 +1,10 @@
 package rest;
 
-import org.junit.jupiter.api.*;
-import rest_assured.gorest_co_in.dto.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
+import rest_assured.gorest_co_in.dto.User;
 import utils.CsvWorker;
 
 import java.util.LinkedList;
@@ -20,17 +23,14 @@ public abstract class BaseRestTest {
         prepareData();
     }
 
-    //list of users from http request
     private static synchronized void prepareData() {
         if (users == null) {
-            users = new LinkedList<>(getUsers());
-        }
-    }
-
-    //list of users from csv file
-    private static synchronized void prepareData2() {
-        if (users == null) {
-            users = new LinkedList<>(CsvWorker.getObjectList(User.class, 0));
+            String valueSource = System.getProperty("test.source");
+            if (valueSource != null && valueSource.equalsIgnoreCase("csv")) {
+                users = new LinkedList<>(CsvWorker.getObjectList(User.class, 0));
+            } else {
+                users = new LinkedList<>(getUsers());
+            }
         }
     }
 
