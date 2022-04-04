@@ -28,6 +28,18 @@ public class UserService extends BaseRestService {
                 .extract().as(User.class);
     }
 
+    public static <ERROR_BODY> void createUser(User body, String statusLine, Class<ERROR_BODY> cls) {
+        given()
+                .spec(requestSpecification)
+                .basePath("/v2/users")
+                .contentType(ContentType.JSON)
+                .body(body)
+                .post()
+                .then()
+                .statusLine(statusLine)
+                .extract().as(cls);
+    }
+
     @SuppressWarnings("UnusedReturnValue")
     public static User updateUser(User user) {
         user.setMName("Alice");
