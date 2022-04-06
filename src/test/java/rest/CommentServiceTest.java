@@ -91,6 +91,6 @@ public class CommentServiceTest extends BaseRestTest {
         Comment comment4 = jsonFileToObject(filePath, Comment.class);
         comment4.setBody("");
         Arguments arguments4 = Arguments.of(-2, "HTTP/1.1 422 Unprocessable Entity", PostNegative[].class, comment3);
-        return Stream.of(arguments1, arguments2, arguments3, arguments4);
+        return Stream.of(arguments1, arguments2, arguments3, arguments4);//TODO - to make for checking all object in json array
     }
 }
