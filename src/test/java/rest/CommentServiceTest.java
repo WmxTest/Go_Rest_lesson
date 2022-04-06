@@ -5,12 +5,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import rest_assured.gorest_co_in.CommentService;
 import rest_assured.gorest_co_in.PostService;
 import rest_assured.gorest_co_in.dto.Comment;
 import rest_assured.gorest_co_in.dto.PostNegative;
-import utils.ValueUtils;
 
 import java.util.stream.Stream;
 
@@ -75,7 +73,6 @@ public class CommentServiceTest extends BaseRestTest {
     public void createNewCommentNegative(int postId, String stringLine, Class<PostNegative[]> cls, Comment commentBody) {
         CommentService.createCommentNegative(postId, stringLine, cls, commentBody);
     }
-
 
     @SuppressWarnings("ConstantConditions")
     private Stream<Arguments> createCommentDateForNegative() {
