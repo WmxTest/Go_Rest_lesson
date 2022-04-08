@@ -15,6 +15,7 @@ import utils.ValueUtils;
 
 import java.util.stream.Stream;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PostServiceTest extends BaseRestTest {
     private Integer userId;
     private Post postBody;
