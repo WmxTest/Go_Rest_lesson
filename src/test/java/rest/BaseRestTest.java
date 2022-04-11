@@ -27,7 +27,7 @@ public abstract class BaseRestTest {
         if (users == null) {
             String valueSource = System.getProperty("test.source");
             if (valueSource != null && valueSource.equalsIgnoreCase("csv")) {
-                users = new LinkedList<>(CsvWorker.getObjectList(User.class, 0));
+                users = new LinkedList<>(CsvWorker.getObjectList(User.class, 0, "src/main/resources/users.CSV"));
             } else {
                 users = new LinkedList<>(getUsers());
             }

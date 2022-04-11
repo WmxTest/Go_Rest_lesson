@@ -7,15 +7,12 @@ import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.opencsv.exceptions.CsvValidationException;
-import rest_assured.gorest_co_in.UserService;
-import rest_assured.gorest_co_in.dto.User;
 
 import java.io.*;
 import java.util.List;
 
 public class CsvWorker {
 
-    private static final String FILE_PATH = "src/main/resources/users.CSV";
     private static CSVReader csvReader;
 
     private CsvWorker() {
@@ -45,16 +42,10 @@ public class CsvWorker {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        List<User> users = UserService.getUsers();
-        writeData2(users, new FileWriter(FILE_PATH));
-    }
-
-
-    public static CSVReader getCsvReaderInstance() {
+    public static CSVReader getCsvReaderInstance(String filePath) {
         if (csvReader == null) {
             try {
-                csvReader = new CSVReaderBuilder(new FileReader(FILE_PATH))
+                csvReader = new CSVReaderBuilder(new FileReader(filePath))
                         .withSkipLines(0)
                         .build();
             } catch (IOException e) {
@@ -64,9 +55,9 @@ public class CsvWorker {
         return csvReader;
     }
 
-    public static synchronized String[] readLineByLineFromCsvFile_2() {
+    public static synchronized String[] readLineByLineFromCsvFile_2(String filePath) {
         try {
-            return getCsvReaderInstance().readNext();
+            return getCsvReaderInstance(filePath).readNext();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
             return null;
@@ -74,14 +65,14 @@ public class CsvWorker {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public static <T> List<T> getObjectList(Class<T> cls, int skippedLines) {
+    public static <T> List<T> getObjectList(Class<T> cls, int skippedLines, String filePath) {
         List<T> list;
         ColumnPositionMappingStrategy<T> mappingStrategy = new ColumnPositionMappingStrategy<>();
         mappingStrategy.setType(cls);
 
         Reader reader = null;
         try {
-            reader = new FileReader(FILE_PATH);
+            reader = new FileReader(filePath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
